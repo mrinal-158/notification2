@@ -39,9 +39,8 @@ class UserNotify extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Invoice Paid Successfully')
-            ->line('Your invoice has been paid.')
-            ->line('Amount: ' . $this->messageMail)
+            ->subject($this->messageDB)
+            ->line('YOUR OTP: ' . $this->messageMail)
             ->action('View Dashboard', url('/dashboard'))
             ->line('Thank you for using our app!');
     }

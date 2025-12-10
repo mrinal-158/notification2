@@ -199,6 +199,8 @@ class AuthController extends Controller
 
         $token = JWTAuth::attempt($request->only('email', 'password'));
 
+        $user->notify(new UserNotify('You are Logged in Google!', 'You are Logged in Google!'));
+
         return response()->json([
             'message' => 'Login successful',
             'token' => $token,
