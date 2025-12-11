@@ -19,8 +19,14 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
-    Route::get('/show-notification', [NotifyController::class, 'showNotification'])->name('show.notification');
     Route::post('/update', [AuthController::class, 'updateProfile']);
     Route::delete('/delete', [AuthController::class, 'deleteAccount']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    
+    //Notification routes
+    Route::get('/all-notification', [NotifyController::class, 'all'])->name('all.notification');
+    Route::get('/unread-notification', [NotifyController::class, 'unread'])->name('unread.notification');
+    Route::get('/read-notification', [NotifyController::class, 'read'])->name('read.notification');
+    Route::post('mark-notification/{id}', [NotifyController::class, 'markAsRead'])->name('mark.notification');
+    Route::post('/mark-all-notification', [NotifyController::class, 'markAllAsRead'])->name('mark.all.notification');
 });
